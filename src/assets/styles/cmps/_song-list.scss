@@ -1,0 +1,39 @@
+.song-list {
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+
+    li {
+        background-color: $clr2;
+        padding: 5px;
+        border-radius: 5px;
+        height: 50px;
+        display: flex;
+        position: relative;
+
+        p {
+            color: white;
+            margin: 0;
+        }
+
+        a {
+            width: 100%;
+        }
+
+        .remove-btn {
+            position: absolute;
+            background-color: transparent;
+            top: 8px;
+            right: 8px;
+            border: 0;
+            font-size: 1.2rem;
+        }
+    }
+
+    a {
+        color: $clr1;
+        padding: 10px;
+    }
+}
