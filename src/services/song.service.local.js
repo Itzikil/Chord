@@ -16,16 +16,15 @@ export const songService = {
 window.cs = songService
 // import dataSongs from 'src/data/songs.json' ;
 export async function getSongs() {
-    try {
-        const res = await fetch('/data/songs.json'); // served from public
-        if (!res.ok) throw new Error('Failed to fetch songs.json');
-        return await res.json();
-    } catch (err) {
-        console.error(err);
-        return [];
-    }
+  try {
+    const res = await fetch(`${import.meta.env.BASE_URL}data/songs.json`);
+    if (!res.ok) throw new Error('Failed to fetch songs.json');
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
 }
-
 async function query(filterBy = { txt: '', price: 0 }) {
     var songs = await storageService.query(STORAGE_KEY)
     if (!songs || !songs.length) {
