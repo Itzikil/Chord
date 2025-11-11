@@ -14,12 +14,22 @@ export const songService = {
     addSongMsg
 }
 window.cs = songService
-import dataSongs from '../data/songs.json' ;
+// import dataSongs from 'src/data/songs.json' ;
+export async function getSongs() {
+    try {
+        const res = await fetch('/data/songs.json'); // served from public
+        if (!res.ok) throw new Error('Failed to fetch songs.json');
+        return await res.json();
+    } catch (err) {
+        console.error(err);
+        return [];
+    }
+}
 
 async function query(filterBy = { txt: '', price: 0 }) {
-    var songs = await storageService.query(STORAGE_KEY) 
+    var songs = await storageService.query(STORAGE_KEY)
     if (!songs || !songs.length) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataSongs))
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(await getSongs()))
     }
     if (filterBy.txt) {
         const regex = new RegExp(filterBy.txt, 'i')
