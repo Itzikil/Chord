@@ -14,7 +14,7 @@ export const songService = {
     addSongMsg
 }
 window.cs = songService
-import dataSongs from '../../data/songs.json' ;
+import dataSongs from '../data/songs.json' ;
 
 async function query(filterBy = { txt: '', price: 0 }) {
     var songs = await storageService.query(STORAGE_KEY) 
