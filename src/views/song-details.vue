@@ -1,11 +1,16 @@
 <template>
-    <section class="container home text-center">
-        <h1>{{ currSong.name }}</h1>
-        <!-- <h5 class="text-center">{{ currSong }}</h5> -->
-        <div>
-            <p v-for="data in songData">{{ currSong[data] }}</p>
+  <section class="home-container">
+    <div class="song-card">
+      <h1 class="song-title">{{ currSong.title }}</h1>
+
+      <div class="song-details">
+        <div v-for="data in songData" :key="data" class="detail-row">
+          <p class="detail-key">{{ (data) }}</p>
+          <p class="detail-value">{{ currSong[data] }}</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -17,7 +22,8 @@ export default {
     data() {
         return {
             currSong: '',
-            songData: ['name', 'artist', 'year', 'genre', 'level', 'lang', "time signature", 'tags']
+            songData: ['title', 'artist', 'language', 'rhythm', 'genre', "tempo", 'key', 'scale',
+                'numChordChanges', 'tags', 'difficulty', 'year'],
         }
     },
     created() {

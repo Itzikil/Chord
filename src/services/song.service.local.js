@@ -14,10 +14,13 @@ export const songService = {
     addSongMsg
 }
 window.cs = songService
-
+import dataSongs from '../../data/songs.json' ;
 
 async function query(filterBy = { txt: '', price: 0 }) {
-    var songs = await storageService.query(STORAGE_KEY)
+    var songs = await storageService.query(STORAGE_KEY) 
+    if (!songs || !songs.length) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataSongs))
+    }
     if (filterBy.txt) {
         const regex = new RegExp(filterBy.txt, 'i')
         songs = songs.filter(song => regex.test(song.vendor) || regex.test(song.description))

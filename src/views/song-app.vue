@@ -1,27 +1,38 @@
 <template>
-  <div class="container song-app">
+  <div class="song-app">
     <ul class="song-list">
-      <li v-for="song in songs" :key="song._id">
-        <router-link :to="`/song/${song._id}`">
-          <p>{{ song.name }}</p>
-          <button @click.prevent="removeSong(song._id)" class="remove-btn">x</button>
-          <!-- <button @click.prevent="updateSong(song)">Update</button> -->
+      <li v-for="song in songs" :key="song._id" class="song-card">
+        <router-link :to="`/song/${song._id}`" class="song-link">
+          <div class="song-info">
+            <p class="song-title">{{ song.title }}</p>
+            <div class="song-tags">
+              <span class="tag">{{ song.key }}</span>
+              <span class="tag">{{ song.difficulty }}</span>
+              <span class="tag">{{ song.tempo }}</span>
+            </div>
+          </div>
+          <!-- <button @click.prevent="removeSong(song._id)" class="remove-btn">×</button> -->
         </router-link>
       </li>
     </ul>
-    <button @click="openAddCmp = !openAddCmp">{{ !openAddCmp ? 'Add song' : 'close add song' }}</button>
+
+    <button @click="openAddCmp = !openAddCmp" class="toggle-add-btn">
+      {{ !openAddCmp ? 'Add Song' : 'Close Add Song' }}
+    </button>
+
     <section v-if="openAddCmp" class="add-song-container">
-      <form @submit.prevent="addSong()">
-        <h2>Add song</h2>
-        <label v-for="data in songData" class="data-label" for="">
+      <form @submit.prevent="addSong()" class="add-song-form">
+        <h2>Add Song</h2>
+        <label v-for="data in songData" :key="data" class="data-label">
           <p>{{ data }}</p>
           <input type="text" v-model="songToAdd[data]" />
         </label>
-        <button>Save</button>
+        <button type="submit" class="save-btn">Save</button>
       </form>
     </section>
   </div>
 </template>
+
 
 <script>
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
